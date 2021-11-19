@@ -105,12 +105,17 @@ export default {
           icon: 'mdi-chart-bubble',
           title: 'Inspire',
           to: '/inspire'
+        },
+        {
+          icon: 'mdi-cannabis',
+          title: 'inicio de sesión',
+          to: '/autentificacion'
         }
       ],
       miniVariant: false,
       right: true,
       rightDrawer: false,
-      title: 'Vuetify.js'
+      title: 'Estamos en perdidas'
     }
   }
 }
