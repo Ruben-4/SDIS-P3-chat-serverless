@@ -1,7 +1,7 @@
 <template>
 
-  <v-card-actions>
-    <formulario></formulario>
-  </v-card-actions>
+  <v-card elevation="10">
+      <formulario></formulario>
+  </v-card>
 
 </template>

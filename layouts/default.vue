@@ -110,6 +110,11 @@ export default {
           icon: 'mdi-cannabis',
           title: 'inicio de sesión',
           to: '/autentificacion'
+        },
+        {
+          icon: 'mdi-bitcoin',
+          title: 'chat',
+          to: '/chat_room'
         }
       ],
       miniVariant: false,

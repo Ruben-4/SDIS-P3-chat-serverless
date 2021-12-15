@@ -4,18 +4,11 @@
     v-model="valid"
     lazy-validation
   >
-    <v-text-field
+    <v-text-field 
       v-model="name"
       :counter="10"
       :rules="nameRules"
-      label="Name"
-      required
-    ></v-text-field>
-
-    <v-text-field
-      v-model="email"
-      :rules="emailRules"
-      label="E-mail"
+      label="Nick"
       required
     ></v-text-field>
 
@@ -32,7 +25,7 @@
       class="mr-4"
       @click="validate"
     >
-      Validate
+      Aceptar
     </v-btn>
 
     <v-btn
@@ -40,7 +33,7 @@
       class="mr-4"
       @click="reset"
     >
-      Reset Form
+      Resetear
     </v-btn>
 
     <v-btn
@@ -63,11 +56,6 @@
       nameRules: [
         v => !!v || 'Name is required',
         v => (v && v.length <= 10) || 'Name must be less than 10 characters',
-      ],
-      email: '',
-      emailRules: [
-        v => !!v || 'E-mail is required',
-        v => /.+@.+\..+/.test(v) || 'E-mail must be valid',
       ],
       checkbox: false,
     }),
