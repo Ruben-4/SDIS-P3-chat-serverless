@@ -1,25 +1,51 @@
-// Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+import { addMessage, listening, loggear } from "~/services/firebase"
 
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebaseConfig = {
-  apiKey: "AIzaSyDQEfah5ocwBklyh09Du2g5XOpaHfSiAzY",
-  authDomain: "sdis-chat-serverless.firebaseapp.com",
-  projectId: "sdis-chat-serverless",
-  storageBucket: "sdis-chat-serverless.appspot.com",
-  messagingSenderId: "419587952897",
-  appId: "1:419587952897:web:e4fa69cf65cc8510a4cb00",
-  measurementId: "G-WX500CE7QJ"
-};
+export const state = () => ({
+    messages: [],
+    listening: false,
+    loggeado: false,
+    logg_data: {}
+    })
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+export const mutations = {
+    addMessage(state, message) {
+        state.messages.push(message)
+    },
+    checkListen(state,value=true) {
+        state.listening = value
+    },
+    setMessage(state, messages){
+        state.messages = messages
+    },
+    logginState(state, logg, logg_data){
+        state.loggeado = logg
+        if (logg == true){
+            state.logg_data = logg_data
+        }else{
+            state.logg_data = null
+        }
+    }
+}
 
-firebase.auth().onAuthStateChanged(() => new Vue({
-    render: h => h(App),
-  }).$mount('#app'))
+export const actions = {  
+    
+    async addMessage({ state, commit }, message) {
+        await addMessage(message)
+    },
+
+    async listen({ state, commit }) {
+        if(!state.listening) {
+            commit('checkListen', true)
+            listening(mensajes => {
+                commit('setMessage', mensajes)
+            })
+        }
+    },
+    async loggin( { state, commit } ){
+        if(!state.loggeado){
+            await loggear(logg_data => {
+                commit('logginState', true )// problema: quiero enviar a la mutacion el dato callback de loggear
+            })//controlar error en el registro
+        }
+    }
+}

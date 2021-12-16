@@ -5,13 +5,10 @@
 </template>
 
 <script>
-import { firebase } from 'firebase'
 export default {
   methods: {
     loginSubmit() {
-      const provider = new firebase.auth.GoogleAuthProvider()
-      firebase.auth().signInWithRedirect(provider)
-        .catch(console.log)
+        this.$emit('input')
     }
   }
 }

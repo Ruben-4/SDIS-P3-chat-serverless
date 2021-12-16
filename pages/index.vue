@@ -66,7 +66,7 @@
           <v-btn
             color="primary"
             nuxt
-            to="/autentificacion"
+            to="/chat_room"
           >
             Continue
           </v-btn>

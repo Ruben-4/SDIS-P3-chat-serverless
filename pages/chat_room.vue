@@ -1,23 +1,36 @@
 <template>
-
-  <v-card elevation="10">
-      <tabla v-if = 'user'></tabla>
-      <loggin v-else></loggin>
-  </v-card>
-
+    <div v-if="false">
+        <ul>
+            <formulario @input='addMessage'>
+            </formulario>
+            <lista :items='messages'>
+            </lista>
+        </ul>
+    </div>
+    <div v-else>
+      <loggin @input='loggin'></loggin>
+    </div>
 </template>
 
 <script>
-import { firebase } from 'firebase'
+import { mapState, mapActions } from 'vuex'
+
 export default {
-  data() {
-    return {
-      user: firebase.auth().currentUser
-    }
-  },
-  name: 'App',
-  components: {
-    Chat, Login
-  }
+computed: {
+    ...mapState('mensajeria', ['messages']),
+
+    /*ordenados(){
+        const lista = [...messages]
+        lista.sort((a,b)=>a.date.localeCompare(b.date))
+    }*/
+    },
+    
+methods: {
+    ...mapActions('mensajeria', ['addMessage', 'listen', 'loggin'])
+    },
+
+fetch() {
+    this.listen()
+}
 }
 </script>
