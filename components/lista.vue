@@ -9,7 +9,7 @@
       <main>
         <div v-for="(item, index) of items" v-bind:key="'index-'+index"
              :class="['message', sentOrReceived()]">
-          <img :src="logg_data.user.photoURL" :alt="item.nick">
+          <p>{{ item.nick }}</p>
           <p>{{ item.msg }}</p>
           <p>{{ item.date }}</p>
         </div>

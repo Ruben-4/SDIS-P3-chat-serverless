@@ -1,7 +1,8 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
+import { getAnalytics, logEvent } from "firebase/analytics";
 import { getFirestore, collection, addDoc, onSnapshot } from "firebase/firestore";
-import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { getAuth, signOut, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -17,12 +18,11 @@ const firebaseConfig = {
     measurementId: "G-WX500CE7QJ"
   };
   
-  // Initialize Firebase
+    // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-//const analytics = getAnalytics(app);
+const analytics = getAnalytics(app);
 
     //authenticator
-
 const provider_auth = new GoogleAuthProvider();
 
 export async function loggear(callback){
@@ -35,7 +35,8 @@ export async function loggear(callback){
         // The signed-in user info.
         const user = result.user;
         // ...
-        callback(result)
+        logEvent(analytics, 'loggeo con éxito');
+        callback(user)
     }).catch((error) => {
         // Handle Errors here.
         const errorCode = error.code;
@@ -48,22 +49,33 @@ export async function loggear(callback){
         callback(error)
     });
 
-} 
+}
+
+export async function desloggear(callback){
+    const auth = getAuth();
+    signOut(auth).then(() => {
+    // Sign-out successful.
+    logEvent(analytics, 'desloggeo con éxito');
+    callback(true)
+    }).catch((error) => {
+    // An error happened.
+    callback(false)
+    });
+}
 
     //cloud firestore
-
 const db = getFirestore();
-const aux_collection = collection(db, 'mensajes_chat');
+const coleccion = collection(db, 'mensajes_chat');
 
 export async function addMessage(message) {
-    const docRef = await addDoc(aux_collection,message)
+    const docRef = await addDoc(coleccion,message)
 } 
 export function listening(callback){
-    const unsubscribe = onSnapshot(aux_collection, (mensajes) => {
-        const datos = [];
+    const unsubscribe = onSnapshot(coleccion, (mensajes) => {///eing????????
+        const datos_fs = [];
         mensajes.forEach((doc) => {
-            datos.push(doc.data());
+            datos_fs.push(doc.data());
         });
-        callback(datos)
+        callback(datos_fs)
     })
 }

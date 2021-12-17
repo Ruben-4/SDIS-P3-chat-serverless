@@ -12,14 +12,14 @@
 
 
 <script>
-  export default { ///////////////////aplicar reglas al boton 
+  export default { 
     data () {
       return{
         valid: false,
         form: { nick: '', 
                 msg: ''
         },
-        rule:{
+        /*rule:{
           nick: [
             v => (v || '').length > 0 || 'This field is required',
             v => (v || '').length < 15 || 'This field must be less than 15'
@@ -28,7 +28,7 @@
             v => (v || '').length > 0 || 'This field is required',
             v => (v || '').length < 150 || 'This field must be less than 150'
           ]
-        },
+        },*/
       }
     },
     
@@ -44,10 +44,6 @@
   }
 
 </script>
-
-
-
-
 
 
 <style lang="scss">
