@@ -1,10 +1,10 @@
 <template>
-    <div v-if="false">
+    <div v-if="loggeado">
         <ul>
+            <lista :items='messages' :logg_data='logg_data' @input='loggout'>
+            </lista>
             <formulario @input='addMessage'>
             </formulario>
-            <lista :items='messages'>
-            </lista>
         </ul>
     </div>
     <div v-else>
@@ -17,16 +17,16 @@ import { mapState, mapActions } from 'vuex'
 
 export default {
 computed: {
-    ...mapState('mensajeria', ['messages']),
+    ...mapState('mensajeria', ['messages', 'loggeado', 'logg_data']),
 
-    /*ordenados(){
+    /*ordenados(){------------------------> pasar a acciones o mutaciones
         const lista = [...messages]
         lista.sort((a,b)=>a.date.localeCompare(b.date))
     }*/
     },
     
 methods: {
-    ...mapActions('mensajeria', ['addMessage', 'listen', 'loggin'])
+    ...mapActions('mensajeria', ['addMessage', 'listen', 'loggin', 'loggout'])
     },
 
 fetch() {

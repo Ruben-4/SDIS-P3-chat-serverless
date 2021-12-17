@@ -6,7 +6,7 @@ export const state = () => ({
     loggeado: false,
     logg_data: {}
     })
-
+//----------------cambiar nombres
 export const mutations = {
     addMessage(state, message) {
         state.messages.push(message)
@@ -14,7 +14,7 @@ export const mutations = {
     checkListen(state,value=true) {
         state.listening = value
     },
-    setMessage(state, messages){
+    load_message(state, messages){
         state.messages = messages
     },
     logginState(state, logg, logg_data){
@@ -37,15 +37,21 @@ export const actions = {
         if(!state.listening) {
             commit('checkListen', true)
             listening(mensajes => {
-                commit('setMessage', mensajes)
+                commit('load_message', mensajes)
             })
         }
     },
-    async loggin( { state, commit } ){
+    async loggin({ state, commit }){
         if(!state.loggeado){
             await loggear(logg_data => {
-                commit('logginState', true )// problema: quiero enviar a la mutacion el dato callback de loggear
+                commit('logginState', true, logg_data)// problema: quiero enviar a la mutacion el dato callback de loggear
             })//controlar error en el registro
+        }
+    },
+    async loggout({ state, commit }){
+        if(state.loggeado){
+            commit('logginState', false, null)
+            //desloggear con firebase????????????????????
         }
     }
 }

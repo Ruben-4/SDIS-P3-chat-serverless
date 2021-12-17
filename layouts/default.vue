@@ -107,7 +107,7 @@ export default {
           to: '/inspire'
         },
         {
-          icon: 'mdi-chat-processing-outline',
+          icon: 'mdi-bitcoin',
           title: 'Acceso Chat',
           to: '/chat'
         }
