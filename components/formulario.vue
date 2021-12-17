@@ -38,7 +38,7 @@
         this.form.msg = ''
       },
       submit (){
-        this.$emit('input', {...this.form, date :new Date().toLocaleDateString('fr-CA', {day: '2-digit', month: '2-digit',  year: 'numeric', hour: 'numeric', minute: 'numeric'})})
+        this.$emit('input', {...this.form, date :new Date().toLocaleDateString('fr-CA', {day: '2-digit', month: '2-digit',  year: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric'})})
       }
     }
   }

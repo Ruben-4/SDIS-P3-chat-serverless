@@ -28,6 +28,7 @@ export const mutations = {
     ordenar_datos(state){
         const lista = [...state.messages]
         lista.sort((a,b)=>a.date.localeCompare(b.date))
+        state.messages = lista
     }
 }
 
@@ -42,6 +43,7 @@ export const actions = {
             commit('set_listen', true)
             listening(mensajes => {
                 commit('load_message', mensajes)
+                commit('ordenar_datos')
             })
         }
     },

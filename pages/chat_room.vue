@@ -18,11 +18,6 @@ import { mapState, mapActions } from 'vuex'
 export default {
 computed: {
     ...mapState('mensajeria', ['messages', 'loggeado', 'logg_data']),
-
-    /*ordenados(){------------------------> pasar a acciones o mutaciones
-        const lista = [...messages]
-        lista.sort((a,b)=>a.date.localeCompare(b.date))
-    }*/
     },
     
 methods: {
